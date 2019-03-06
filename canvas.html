@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>test for canvas</title>
+	</head>
+	<body>
+		<canvas id="myCanvas" height="250" width="300" ></canvas>
+	</body>
+	<script type="text/javascript">
+		//绘制文本
+		var c=document.getElementById('myCanvas');
+		var cxt=c.getContext('2d');
+		cxt.clearRect(0, 0, c.width, c.height);
+		cxt.beginPath();
+		cxt.shadowOffsetX = 2;
+		cxt.shadowOffsetY = 2;
+		cxt.shadowBlur = 2;
+		cxt.shadowColor = 'aquamarine';
+		cxt.font = '24px Arial';
+		cxt.fillStyle = 'coral';
+		cxt.fillText('ShadowFont',20, 40);
+		
+		//创建渐变
+		var gradient = cxt.createLinearGradient(0, 0, c.width,0);
+		gradient.addColorStop("0","magenta");
+		gradient.addColorStop("0.5","blue");
+		gradient.addColorStop("1.0","red");
+		//用渐变填色
+		cxt.fillStyle = gradient;
+		cxt.fillText("带渐变的文字",20,80);
+		
+		//空心文字
+		cxt.font='30px Arial';
+		cxt.strokeStyle=gradient;
+		cxt.strokeText('This is stroke Text',20,120);
+		cxt.closePath();
+		
+		//创建圆或弧
+		var c2=document.getElementById('myCanvas');//获取绘图区域
+		var cxt=c2.getContext('2d');//创建一个CanvasRenderingContext2D对象
+		//写ClosePath的情况
+		for(var i=0;i<5;i++){
+			cxt.beginPath();
+			cxt.arc(30+i*50,180,20,0,2*Math.PI*(i+1)/5);//x,y,r,sAngle,eAngle,counterclockwise,x和y 表示圆形的圆心坐标值。
+			cxt.strokeStyle=gradient;
+			cxt.lineWidth='5';
+			cxt.closePath();
+			cxt.stroke();
+		}
+	</script>
+</html>
